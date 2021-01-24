@@ -1,0 +1,60 @@
+#
+# This file is part of BDC JupyterHub.
+# Copyright (C) 2021 INPE.
+#
+# BDC JupyterHub is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+#
+
+kind: pipeline
+name: jupyterhub-docker
+
+steps:
+    - name: submodules
+      image: alpine/git
+      commands:
+          - git submodule update --init --recursive
+
+    - name: publish-jupyterhub-pygeo
+      image: plugins/docker
+      network_mode: bridge
+      settings:
+          repo: registry.dpi.inpe.br/jupyterhub/pygeo
+          registry: registry.dpi.inpe.br
+          username:
+              from_secret: registry_user
+          password:
+              from_secret: registry_pass
+          context: docker/pygeo
+          dockerfile: docker/pygeo/Dockerfile
+          cache_from: "registry.dpi.inpe.br/jupyterhub/pygeo:latest"
+          tags:
+              - ${DRONE_SEMVER}
+              - latest
+      when:
+          event:
+              - tag
+
+    - name: publish-jupyterhub-rgeo-base1
+      image: plugins/docker
+      network_mode: bridge
+      settings:
+          repo: registry.dpi.inpe.br/jupyterhub/rgeo-base1
+          registry: registry.dpi.inpe.br
+          username:
+              from_secret: registry_user
+          password:
+              from_secret: registry_pass
+          context: docker/sits-docker/docker/ubuntu
+          dockerfile: docker/sits-docker/docker/ubuntu/Dockerfile
+          cache_from: "registry.dpi.inpe.br/jupyterhub/rgeo-base1:latest"
+          tags:
+              - ${DRONE_SEMVER}
+              - latest
+          build_args:
+              - BASE_IMAGE=jupyter/minimal-notebook
+              - ROOT_USER=root
+              - BASE_USER=jovyan
+          when:
+              event:
+                  - tag
