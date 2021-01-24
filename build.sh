@@ -75,20 +75,30 @@ docker build ${BUILD_MODE} \
        -t ${R_GEOSPATIAL_IMAGE_TAG} \
        --file Dockerfile  .
 
+cd ../../
+
 
 #
 # Build SITS R image with all the package dependencies already installed
 #
-#cd ../sits
-#
-#docker build ${BUILD_MODE} \
-#       --build-arg BASE_IMAGE=${R_GEOSPATIAL_IMAGE_TAG} \
-#       -t ${SITS_BASE_IMAGE_TAG} \
-#       --file Dockerfile  .
-#
-#cd ../../../docker/sits
-#
-#docker build ${BUILD_MODE} \
-#       --build-arg BASE_IMAGE=${SITS_BASE_IMAGE_TAG} \
-#       -t ${SITS_IMAGE_TAG} \
-#       --file Dockerfile  .
+echo "Building SITS image..."
+echo "\t=>sits base image..."
+
+cd sits-docker/docker/sits
+
+
+docker build ${BUILD_MODE} \
+       --build-arg BASE_IMAGE=${R_GEOSPATIAL_BASE2_IMAGE_TAG} \
+       -t ${SITS_BASE_IMAGE_TAG} \
+       --file Dockerfile  .
+
+echo "\t=>final image..."
+
+cd ../../../docker/sits
+
+docker build ${BUILD_MODE} \
+       --build-arg BASE_IMAGE=${SITS_BASE_IMAGE_TAG} \
+       -t ${SITS_IMAGE_TAG} \
+       --file Dockerfile  .
+
+cd ../../
