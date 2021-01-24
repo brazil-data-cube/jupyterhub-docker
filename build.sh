@@ -20,6 +20,9 @@ BUILD_MODE=""
 TAG_PREFIX="bdc"
 TAG_VERSION="1.0.0"
 
+ODC_IMAGE_TAG="${TAG_PREFIX}/jupyterhub-odc:${TAG_VERSION}"
+ODCSTATS_IMAGE_TAG="${TAG_PREFIX}/jupyterhub-odc-stats:${TAG_VERSION}"
+
 PYTHON_GEOSPATIAL_IMAGE_TAG="${TAG_PREFIX}/jupyterhub-pygeo:${TAG_VERSION}"
 
 R_GEOSPATIAL_BASE1_IMAGE_TAG="${TAG_PREFIX}/jupyterhub-rgeo-base1:${TAG_VERSION}"
@@ -53,7 +56,9 @@ echo "\t=>base image 1..."
 cd sits-docker/docker/ubuntu
 
 docker build ${BUILD_MODE} \
-       --build-arg BASE_IMAGE=jupyter/minimal-notebook:177037d09156 \
+       --build-arg BASE_IMAGE=jupyter/minimal-notebook \
+       --build-arg ROOT_USER=root \
+       --build-arg BASE_USER=jovyan \
        -t ${R_GEOSPATIAL_BASE1_IMAGE_TAG} \
        --file Dockerfile .
 
@@ -63,6 +68,8 @@ cd ../R
 
 docker build ${BUILD_MODE} \
        --build-arg BASE_IMAGE=${R_GEOSPATIAL_BASE1_IMAGE_TAG} \
+       --build-arg ROOT_USER=root \
+       --build-arg BASE_USER=jovyan \
        --build-arg SITS_TAG_VERSION=v0.9.8 \
        --build-arg SITS_ENVIRONMENT_TYPE=full \
        -t ${R_GEOSPATIAL_BASE2_IMAGE_TAG} \
@@ -102,3 +109,28 @@ docker build ${BUILD_MODE} \
        --file Dockerfile  .
 
 cd ../../
+
+
+#
+# Build ODC image
+#
+echo "Building ODC image..."
+
+cd odc-docker/docker/odc
+
+docker build ${BUILD_MODE} \
+             -t ${ODC_IMAGE_TAG} \
+             --file Dockerfile .
+
+
+#
+# Build ODC-Stats image
+#
+echo "Building ODC-Stats image..."
+
+cd ../odc-stats
+
+docker build ${BUILD_MODE} \
+             --build-arg BASE_IMAGE=${ODC_IMAGE_TAG} \
+             -t ${ODCSTATS_IMAGE_TAG} \
+             --file Dockerfile .
