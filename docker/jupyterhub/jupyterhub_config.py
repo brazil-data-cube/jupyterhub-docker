@@ -24,9 +24,9 @@ def create_dir_hook(spawner):
     spawner.volumes[os.path.join(users_base_dir_source, username)] = { "bind": '/home/jovyan/work'}
 
 
-def read_users_definition(user_definition_file = 'users.json'):
+def read_json(definition_file):
     import json
-    with open(user_definition_file, 'r') as f:
+    with open(definition_file, 'r') as f:
         return json.load(f)
 
 # CORS
@@ -40,12 +40,7 @@ c.LocalGoogleOAuthenticator.oauth_callback_url = os.environ['GOOGLE_OAUTH_CALLBA
 ## Docker spawner
 c.JupyterHub.spawner_class = 'dockerspawner.DockerSpawner'
 c.DockerSpawner.network_name = os.environ['DOCKER_NETWORK_NAME']
-c.DockerSpawner.allowed_images = {
-    'Satellite Image Time Series (SITS) version 0.9.8': 'registry.dpi.inpe.br/jupyterhub/sits:1.0.0',
-    'Python Geospatial': 'registry.dpi.inpe.br/jupyterhub/pygeo:1.0.0',
-    'R Geospatial': 'registry.dpi.inpe.br/jupyterhub/rgeo:1.0.0'
-    'Open Data Cube version 1.8': 'registry.dpi.inpe.br/jupyterhub/odc-stats:1.0.0',
-}
+c.DockerSpawner.allowed_images = read_json("images.json")
 
 # See https://github.com/jupyterhub/dockerspawner/blob/master/examples/oauth/jupyterhub_config.py
 c.JupyterHub.hub_ip = os.environ['HUB_IP']
@@ -97,7 +92,7 @@ c.JupyterHub.services = [
 c.LocalGoogleOAuthenticator.create_system_users = True
 
 ## Reading user's definition file
-users_definition_file = read_users_definition('/srv/jupyterhub/users.json')
+users_definition_file = read_json('/srv/jupyterhub/users.json')
 
 c.Authenticator.admin_users = set(users_definition_file['adminlist'])
 c.Authenticator.whitelist = set(users_definition_file['whitelist'])

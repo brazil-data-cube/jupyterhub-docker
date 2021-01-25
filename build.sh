@@ -32,6 +32,7 @@ R_GEOSPATIAL_IMAGE_TAG="${TAG_PREFIX}/jupyterhub-rgeo:${TAG_VERSION}"
 SITS_BASE_IMAGE_TAG="${TAG_PREFIX}/jupyterhub-sits-base:${TAG_VERSION}"
 SITS_IMAGE_TAG="${TAG_PREFIX}/jupyterhub-sits:${TAG_VERSION}"
 
+JUPYTERHUB_IMAGE_TAG="${TAG_PREFIX}/jupyterhub:${TAG_VERSION}"
 
 #
 # Build Geospatial Python image with all the package dependencies already installed
@@ -116,6 +117,8 @@ cd ../../
 #
 echo "Building ODC image..."
 
+# copy datacube-db config file
+cp config/odc-datacube.conf-example odc-docker/docker/odc/.datacube.conf
 cd odc-docker/docker/odc
 
 docker build ${BUILD_MODE} \
@@ -133,4 +136,20 @@ cd ../odc-stats
 docker build ${BUILD_MODE} \
              --build-arg BASE_IMAGE=${ODC_IMAGE_TAG} \
              -t ${ODCSTATS_IMAGE_TAG} \
+             --file Dockerfile .
+
+cd ../../
+
+#
+# Build JupyterHub Image
+#
+echo "Building JupyterHub image..."
+
+cp config/jupyterhub-images.json docker/jupyterhub/images.json
+cp config/jupyterhub-users.json docker/jupyterhub/users.json
+cd docker/jupyterhub/
+
+docker build ${BUILD_MODE} \
+             --build-arg BASE_IMAGE=jupyterhub/jupyterhub:1.3.0 \
+             -t ${JUPYTERHUB_IMAGE_TAG} \
              --file Dockerfile .

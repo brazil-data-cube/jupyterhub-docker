@@ -1,0 +1,6 @@
+{
+    "Satellite Image Time Series (SITS) version 0.9.8": "registry.dpi.inpe.br/jupyterhub/sits:1.0.0",
+    "Python Geospatial": "registry.dpi.inpe.br/jupyterhub/pygeo:1.0.0",
+    "R Geospatial": "registry.dpi.inpe.br/jupyterhub/rgeo:1.0.0",
+    "Open Data Cube version 1.8": "registry.dpi.inpe.br/jupyterhub/odc-stats:1.0.0"
+}
