@@ -138,7 +138,7 @@ docker build ${BUILD_MODE} \
              -t ${ODCSTATS_IMAGE_TAG} \
              --file Dockerfile .
 
-cd ../../
+cd ../../../
 
 #
 # Build JupyterHub Image
