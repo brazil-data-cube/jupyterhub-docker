@@ -119,3 +119,14 @@ venv.bak/
 
 # MacOS
 .DS_Store
+
+# JupyterHub-Docker Project
+./data
+./examples
+./users-home
+./config/.env
+config/images.json
+config/users.json
+./config/datacube.conf
+docker/jupyterhub/images.json
+docker/jupyterhub/users.json

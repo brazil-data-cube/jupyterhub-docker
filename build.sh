@@ -145,8 +145,8 @@ cd ../../../
 #
 echo "Building JupyterHub image..."
 
-cp config/jupyterhub-images.json docker/jupyterhub/images.json
-cp config/jupyterhub-users.json docker/jupyterhub/users.json
+cp config/images.json docker/jupyterhub/images.json
+cp config/users.json docker/jupyterhub/users.json
 cd docker/jupyterhub/
 
 docker build ${BUILD_MODE} \

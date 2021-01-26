@@ -3,19 +3,26 @@ FROM ${BASE_IMAGE}
 
 
 #
+# Install ipyleaflet in base conda environment
+#
+RUN conda install --yes \
+                  --channel conda-forge \
+                  ipyleaflet
+
+
+#
 # Install JupyterLab extensions
 #
-RUN conda install --yes ipyleaflet \
-    && jupyter labextension install @jupyter-widgets/jupyterlab-manager \
-    && jupyter labextension install jupyter-leaflet \
-    && jupyter nbextension enable --py --sys-prefix ipyleaflet \
-    && jupyter labextension install @jupyterlab/debugger \
-    && jupyter labextension install @jupyterlab/geojson-extension \
-    && jupyter labextension install @jupyterlab/vega3-extension \
-    && jupyter labextension install @jupyterlab/mathjax3-extension \
-    && jupyter labextension install @jupyterlab/github \
-    && jupyter labextension install @jupyterlab/latex \
-    && jupyter nbextension enable --py widgetsnbextension
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
+RUN jupyter labextension install jupyter-leaflet
+RUN jupyter nbextension enable --py --sys-prefix ipyleaflet
+RUN jupyter labextension install @jupyterlab/debugger
+RUN jupyter labextension install @jupyterlab/geojson-extension
+RUN jupyter labextension install @jupyterlab/vega3-extension
+RUN jupyter labextension install @jupyterlab/mathjax3-extension
+RUN jupyter labextension install @jupyterlab/github
+RUN jupyter labextension install @jupyterlab/latex
+RUN jupyter nbextension enable --py widgetsnbextension
 
 
 #
