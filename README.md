@@ -101,3 +101,18 @@ firefox http://127.0.0.1:8888/?token=c572d8caa0761a68f75b9fe7efd98226bff236ae248
 This will presents you with the JupyterLab user interface.
 
 If you want to shutdown the JupyterLab, you can do it from the browser or in the terminal by pressing `CTRL+C`. Notice that we used the option ``--rm`` to create the container andthus it will be removed when the JupyterLab shutdowns. 
+
+
+## Tips
+
+### Clone the Repository
+
+```shell
+git clone --recurse-submodules https://github.com/brazil-data-cube/jupyterhub-docker
+```
+
+### Update submodule
+
+```shell
+git submodule update --recursive --remote
+```
