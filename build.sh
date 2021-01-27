@@ -57,7 +57,7 @@ echo "\t=>base image 1..."
 cd sits-docker/docker/ubuntu
 
 docker build ${BUILD_MODE} \
-       --build-arg BASE_IMAGE=jupyter/minimal-notebook \
+       --build-arg BASE_IMAGE=jupyter/minimal-notebook@sha256:5c51e1d8b979afad8b95d231aea3da231cfd9e85884aeef89bf44dadb55369a3 \
        --build-arg ROOT_USER=root \
        --build-arg BASE_USER=jovyan \
        -t ${R_GEOSPATIAL_BASE1_IMAGE_TAG} \
