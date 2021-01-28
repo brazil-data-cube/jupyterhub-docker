@@ -118,7 +118,7 @@ cd ../../
 echo "Building ODC image..."
 
 # copy datacube-db config file
-cp config/odc-datacube.conf-example odc-docker/docker/odc/.datacube.conf
+cp config/datacube.conf odc-docker/docker/odc/.datacube.conf
 cd odc-docker/docker/odc
 
 docker build ${BUILD_MODE} \
