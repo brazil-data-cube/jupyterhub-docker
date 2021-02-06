@@ -22,9 +22,10 @@ docker image ls | grep jupyterhub
 ```
 
 ```
-bdc/jupyterhub-rgeo-base1             1.0.0       869f70880050   2 hours ago     2.3GB
+bdc/jupyterhub-rgeo-base1    1.0.0       869f70880050   2 hours ago     2.3GB
 ```
 
+**Note**: To run the [build.sh](build.sh) script, it is necessary to configure the `.env`, `images.json`, `users.json`, and `datacube.conf` files. The templates for the creation of each of these files are in the config directory. The `.env` script must be in the same directory as docker-compose and the others must remain in the `config` directory.
 
 ### Running Containers
 
