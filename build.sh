@@ -132,6 +132,8 @@ docker build ${BUILD_MODE} \
              --build-arg BUILD_DEVELOPMENT_MODE=${ODC_IMAGE_USE_DEVELOPMENT_MODE} \
              --file Dockerfile .
 
+cd ../../../
+
 #
 # Build JupyterHub Image
 #
