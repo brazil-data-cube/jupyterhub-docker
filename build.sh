@@ -18,7 +18,7 @@ BUILD_MODE=""
 # ODC: Allow jovyan to install o.s and conda packages
 #
 ODC_IMAGE_JOVYAN_AS_ROOT=0
-ODC_IMAGE_USE_DEVELOPMENT_MODE=1
+ODC_IMAGE_USE_DEVELOPMENT_MODE=0
 
 #
 # Image Tags
