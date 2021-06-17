@@ -15,13 +15,18 @@ set -eou pipefail
 BUILD_MODE=""
 
 #
+# ODC: Allow jovyan to install o.s and conda packages
+#
+ODC_IMAGE_JOVYAN_AS_ROOT=0
+ODC_IMAGE_USE_DEVELOPMENT_MODE=0
+
+#
 # Image Tags
 #
 TAG_PREFIX="bdc"
 TAG_VERSION="1.0.0"
 
 ODC_IMAGE_TAG="${TAG_PREFIX}/jupyterhub-odc:${TAG_VERSION}"
-ODCSTATS_IMAGE_TAG="${TAG_PREFIX}/jupyterhub-odc-stats:${TAG_VERSION}"
 
 PYTHON_GEOSPATIAL_IMAGE_TAG="${TAG_PREFIX}/jupyterhub-pygeo:${TAG_VERSION}"
 
@@ -123,19 +128,8 @@ cd odc-docker/docker/odc
 
 docker build ${BUILD_MODE} \
              -t ${ODC_IMAGE_TAG} \
-             --file Dockerfile .
-
-
-#
-# Build ODC-Stats image
-#
-echo "Building ODC-Stats image..."
-
-cd ../odc-stats
-
-docker build ${BUILD_MODE} \
-             --build-arg BASE_IMAGE=${ODC_IMAGE_TAG} \
-             -t ${ODCSTATS_IMAGE_TAG} \
+             --build-arg JOVYAN_AS_ROOT=${ODC_IMAGE_JOVYAN_AS_ROOT} \
+             --build-arg BUILD_DEVELOPMENT_MODE=${ODC_IMAGE_USE_DEVELOPMENT_MODE} \
              --file Dockerfile .
 
 cd ../../../
