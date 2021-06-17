@@ -130,3 +130,6 @@ users.json
 datacube.conf
 docker/jupyterhub/images.json
 docker/jupyterhub/users.json
+docker/sentinel-toolboxes/esa-snap_all_unix_*.sh
+docker/sentinel-toolboxes/esa-snap_sentinel_unix_*.sh
+docker/sentinel-toolboxes/esa-snap_smos_unix_*.sh

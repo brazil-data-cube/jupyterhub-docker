@@ -67,10 +67,8 @@ RUN source activate geospatial \
 #
 USER $NB_UID
 
-RUN pip3 install --upgrade pip \
-    && pip3 install --upgrade setuptools
-
 RUN source activate geospatial \
     && pip3 install --upgrade pip \
     && pip3 install --upgrade setuptools \
+    && pip3 install --upgrade wheel \
     && pip3 install wtss stac.py

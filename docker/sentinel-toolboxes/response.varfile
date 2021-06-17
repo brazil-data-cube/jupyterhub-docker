@@ -1,0 +1,16 @@
+# install4j response file for ESA SNAP 8.0
+deleteSnapDir=DESKTOP
+executeLauncherWithPythonAction$Boolean=true
+forcePython$Boolean=true
+pythonExecutable=/opt/conda/envs/geospatial/bin/python
+sys.adminRights$Boolean=true
+sys.component.RSTB$Boolean=true
+sys.component.S1TBX$Boolean=true
+sys.component.S2TBX$Boolean=false
+sys.component.S3TBX$Boolean=false
+sys.component.SNAP$Boolean=true
+sys.installationDir=/opt/snap/8.0
+sys.languageId=en
+sys.programGroupDisabled$Boolean=true
+sys.symlinkDir=/usr/local/bin
+
