@@ -61,6 +61,12 @@ cd /opt/snap/${BDC_SNAP_VERSION}.0/snap-python/snappy
 
 python setup.py install
 
+#
+# Update modules
+#
+/opt/snap/${BDC_SNAP_VERSION}.0/bin/snap --nosplash --nogui --modules --list --refresh
+
+/opt/snap/${BDC_SNAP_VERSION}.0/bin/snap --nosplash --nogui --modules --update-all
 
 #
 # Remove non-necessary software and files
