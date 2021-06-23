@@ -36,6 +36,8 @@ RUN cd /tmp/ && \
     ./install-snap.sh && \
     rm install-snap.sh
 
+RUN mkdir -p /home/$NB_USER/.snap/ \
+	&& chown -R $NB_USER /home/$NB_USER/.snap/
 
 #
 # Change user to jovyan

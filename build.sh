@@ -29,6 +29,7 @@ TAG_VERSION="1.0.0"
 ODC_IMAGE_TAG="${TAG_PREFIX}/jupyterhub-odc:${TAG_VERSION}"
 
 PYTHON_GEOSPATIAL_IMAGE_TAG="${TAG_PREFIX}/jupyterhub-pygeo:${TAG_VERSION}"
+PYTHON_GEOSPATIAL_SNAPPY_IMAGE_TAG="${TAG_PREFIX}/sentinel-toolboxes:${TAG_VERSION}"
 
 R_GEOSPATIAL_BASE1_IMAGE_TAG="${TAG_PREFIX}/jupyterhub-rgeo-base1:${TAG_VERSION}"
 R_GEOSPATIAL_BASE2_IMAGE_TAG="${TAG_PREFIX}/jupyterhub-rgeo-base2:${TAG_VERSION}"
@@ -50,8 +51,21 @@ docker build ${BUILD_MODE} \
        -t ${PYTHON_GEOSPATIAL_IMAGE_TAG} \
        --file Dockerfile  .
 
-cd ../../
+cd ../
 
+#
+# Build Geospatial Python image with ESA snappy package library
+#
+echo "Building Python Geospatial image (with ESA snappy package)..."
+
+cd sentinel-toolboxes/
+
+docker build \
+       --build-arg BASE_IMAGE=${PYTHON_GEOSPATIAL_IMAGE_TAG} \
+       -t ${PYTHON_GEOSPATIAL_SNAPPY_IMAGE_TAG} \
+       --file Dockerfile  .
+
+cd ../../
 
 #
 # Build Geospatial R image with all the package dependencies already installed
