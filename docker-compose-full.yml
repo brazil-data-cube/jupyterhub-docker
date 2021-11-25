@@ -32,8 +32,6 @@ services:
             - ./.env
         environment:
             - HOST
-        ports:
-            - "8000:8000"
         restart: unless-stopped
         networks:
             - bdc-jupyterhub-net
@@ -47,7 +45,7 @@ services:
             - "./nginx/conf/default.conf:/etc/nginx/conf.d/default.conf:ro"
             - "./nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro"
             - "./nginx/ssl:/certs:ro"
-            - "${NGINX_LOG_DIR}:/var/log/nginx-fs"
+            - "./nginx/log:/var/log/nginx-fs"
         networks:
             - bdc-jupyterhub-net
         ports:

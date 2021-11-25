@@ -128,4 +128,4 @@ config/users.json
 data/
 examples/
 users-home
-
+nginx/conf/default.conf
