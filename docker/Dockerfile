@@ -6,6 +6,4 @@ RUN pip install \
     oauthenticator==0.12.3 \
     jupyterhub-idle-culler
 
-COPY users.json .
-COPY images.json .
-COPY jupyterhub_config.py .
+

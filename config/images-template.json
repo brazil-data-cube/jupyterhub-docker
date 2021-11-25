@@ -1,0 +1,7 @@
+{
+    "Satellite Image Time Series (SITS) version 0.9.8": "brazildatacube/jupyterlab-sits:1.0.0",
+    "Python Geospatial": "brazildatacube/jupyterlab-pygeo:1.0.0",
+    "R Geospatial": "brazildatacube/rgeo:1.0.0",
+    "Open Data Cube version 1.8": "brazildatacube/odc:1.0.0",
+    "Sentinel Toolboxes 8.0": "brazildatacube/sentinel-toolboxes:1.0.0"
+}
