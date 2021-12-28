@@ -1,24 +1,27 @@
-version: '3.2'
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2021 National Institute for Space Research.
+#
+# BDC JupyterHub Docker is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+
+version: "3.2"
 
 services:
     jupyterhub:
-        build:
-            context: ./docker/
-            args:
-                BASE_IMAGE: jupyterhub/jupyterhub:1.3.0
         image: brazildatacube/jupyterhub:1.0.0
         container_name: bdc-jupyterhub
         hostname: bdc-jupyterhub
         volumes:
             -   type: bind
-                source: ./config/jupyterhub_config.py
+                source: ./jupyterhub.py
                 target: /srv/jupyterhub/jupyterhub_config.py
             -   type: bind
-                source: ./config/users.json
-                target: /srv/jupyterhub/users.json
+                source: ./buttler
+                target: /srv/jupyterhub/buttler
             -   type: bind
-                source: ./config/images.json
-                target: /srv/jupyterhub/images.json
+                source: ./config
+                target: /srv/jupyterhub/config
             -   type: bind
                 source: /var/run/docker.sock
                 target: /var/run/docker.sock
@@ -26,8 +29,8 @@ services:
                 source: jupyterhub_data
                 target: "/srv/jupyterhub"
             -   type: bind
-                source: ${USERS_BASE_DIR_SOURCE}
-                target: ${USERS_BASE_DIR_TARGET}
+                source: ${JUPYTERHUB_BASE_DIR_SOURCE}
+                target: ${JUPYTERHUB_BASE_DIR_TARGET}
         env_file:
             - ./.env
         environment:
@@ -38,11 +41,9 @@ services:
         networks:
             - bdc-jupyterhub-net
 
-
 volumes:
   jupyterhub_data:
 
 networks:
     bdc-jupyterhub-net:
-        external:
-            name: ${DOCKER_NETWORK_NAME}
+        external: true

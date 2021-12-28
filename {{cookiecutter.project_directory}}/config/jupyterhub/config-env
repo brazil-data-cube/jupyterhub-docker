@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2021 National Institute for Space Research.
+#
+# BDC JupyterHub Docker is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+
+JUPYTERHUB_BASE_DIR_SOURCE = "./users-home"
+JUPYTERHUB_BASE_DIR_TARGET = "./users-home"
+
+# Required to use the Brazil Data Cube OAuthenticator
+# You can generate this key using the following command: openssl rand -hex 32
+JUPYTERHUB_CRYPT_KEY=
