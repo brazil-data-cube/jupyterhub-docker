@@ -5,9 +5,30 @@
 # BDC JupyterHub Docker is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
-JUPYTERHUB_BASE_DIR_SOURCE = "./users-home"
-JUPYTERHUB_BASE_DIR_TARGET = "./users-home"
+JUPYTERHUB_BASE_DIR_SOURCE="${PWD}/users-home"
+JUPYTERHUB_BASE_DIR_TARGET="/users-home"
 
 # Required to use the Brazil Data Cube OAuthenticator
 # You can generate this key using the following command: openssl rand -hex 32
-JUPYTERHUB_CRYPT_KEY=
+JUPYTERHUB_CRYPT_KEY=""
+
+{% if cookiecutter.oauthenticator == "brazil-data-cube" %}
+#
+# Brazil Data Cube OAuth
+#
+
+#
+# User data URL.
+#
+OAUTH_USERDATA_URL = "<change-me>"
+
+#
+# Access token URL.
+#
+OAUTH_ACCESS_TOKEN_URL = "<change-me>"
+
+#
+# Authorize URL.
+#
+OAUTH_AUTHORIZE_URL = "<change-me>"
+{% endif %}
