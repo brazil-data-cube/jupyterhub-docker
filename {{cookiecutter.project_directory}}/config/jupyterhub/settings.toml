@@ -1,0 +1,56 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2021 National Institute for Space Research.
+#
+# BDC JupyterHub Docker is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+
+[jupyterhub]
+
+hub_ip = "jupyterhub"
+base_url = "/jupyter"
+
+[jupyterhub.oauth]
+
+client_id = ""
+client_secret = ""
+oauth_callback_url = ""
+
+oauth_application_name = "jupyterhub"
+
+[jupyterhub.oauth.google]
+
+whitelist = []
+admin_users = ["gribeiro.mg@gmail.com", "efelipecarlos@gmal.com"]
+
+[jupyterhub.oauth.bdc]
+
+admin_roles = ["admin"]
+allowed_roles = ["user"]
+allowed_groups = ["jupyterhub:user"]
+
+
+[jupyterhub.spawner]
+
+notebook_dir = "/home/jovyan/work"
+docker_network_name = "bdc-jupyterhub-net"
+
+[jupyterhub.spawner.volumes]
+
+"./data" = { "bind" = "/data", "mode" = "rw" }
+"./examples" = { "bind" = "/home/jovyan/work/examples", "mode" = "ro" }
+
+[jupyterhub.spawner.images]
+
+"R Geospatial" = "brazildatacube/rgeo:1.0.0"
+"Open Data Cube version 1.8" = "brazildatacube/odc:1.0.0"
+"Python Geospatial" = "brazildatacube/jupyterlab-pygeo:1.0.0"
+"Sentinel Toolboxes 8.0" = "brazildatacube/sentinel-toolboxes:1.0.0"
+"Satellite Image Time Series (SITS) version 0.9.8" = "brazildatacube/jupyterlab-sits:1.0.0"
+
+
+[jupyterhub.spawner.resources]
+
+remove = true
+cpu_limit = 1
+mem_limit = "2G"
