@@ -8,10 +8,13 @@
 ARG BASE_IMAGE=jupyterhub/jupyterhub:1.4.2
 FROM ${BASE_IMAGE}
 
-RUN pip install --upgrade \
-    pip setuptools wheel \
+RUN apt-get update -y \
+    && apt-get install -y git \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --upgrade pip setuptools wheel \
     && pip install \
         dockerspawner==0.11.1 \
-        oauthenticator==0.12.3 \
+        oauthenticator==14.0.0 \
         jupyterhub-idle-culler \
-        dynaconf==3.1.7
+        dynaconf==3.1.7 \
+        git+https://github.com/brazil-data-cube/bdc-jupyterhub-oauth

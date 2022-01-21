@@ -10,7 +10,11 @@ echo ""
 echo "Cookiecutter pos-processing..."
 echo ""
 
+# Base env config
 mv config/jupyterhub/config-env .env
+
+# Base users directory
+mkdir users-home
 
 
 echo "Done!"
