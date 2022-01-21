@@ -9,6 +9,9 @@ version: "3.2"
 
 services:
     jupyterhub:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile
         image: brazildatacube/jupyterhub:1.0.0
         container_name: bdc-jupyterhub
         hostname: bdc-jupyterhub
