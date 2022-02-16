@@ -16,5 +16,11 @@ mv config/jupyterhub/config-env .env
 # Base users directory
 mkdir users-home
 
+# Looking for the NGINX usage
+{% if cookiecutter.use_nginx == "no" %}
+rm docker-compose.full.yml
+
+rm -rf config/nginx
+{% endif %}
 
 echo "Done!"

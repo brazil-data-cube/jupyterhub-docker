@@ -40,11 +40,15 @@ services:
             - HOST
         restart: unless-stopped
         networks:
-            - bdc-jupyterhub-net
+           - bdc-net
+        {% if cookiecutter.use_nginx == "no" %}
+        ports:
+          - "8000:8000"
+        {% endif %}
 
 volumes:
   jupyterhub_data:
 
 networks:
-    bdc-jupyterhub-net:
+    bdc-net:
         external: true
