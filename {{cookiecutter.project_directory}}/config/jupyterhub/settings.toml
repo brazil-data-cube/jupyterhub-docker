@@ -49,15 +49,15 @@ admin_users = ["user-2@email.com", "user-3@mail.com"]
 #
 
 notebook_dir = "/home/jovyan/work"
-docker_network_name = "bdc-jupyterhub-net"
+docker_network_name = "bdc-net"
 
 [jupyterhub.spawner.volumes]
 #
 # Docker spawner data volumes.
 #
 
-"./data" = { "bind" = "/data", "mode" = "rw" }
-"./examples" = { "bind" = "/home/jovyan/work/examples", "mode" = "ro" }
+# "./data" = { "bind" = "/data", "mode" = "rw" }
+# "./examples" = { "bind" = "/home/jovyan/work/examples", "mode" = "ro" }
 
 [jupyterhub.spawner.images]
 #
