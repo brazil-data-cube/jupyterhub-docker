@@ -41,7 +41,7 @@ allowed_groups = ["jupyterhub:user"]
 
 whitelist = ["user-1@mail.com"]
 admin_users = ["user-2@email.com", "user-3@mail.com"]
-{%- endif -%}
+{%- endif %}
 
 [jupyterhub.spawner]
 #
