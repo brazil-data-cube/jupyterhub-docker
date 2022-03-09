@@ -1,6 +1,0 @@
-[submodule "odc-docker"]
-	path = odc-docker
-	url = https://github.com/brazil-data-cube/odc-docker
-[submodule "sits-docker"]
-	path = sits-docker
-	url = https://github.com/brazil-data-cube/sits-docker

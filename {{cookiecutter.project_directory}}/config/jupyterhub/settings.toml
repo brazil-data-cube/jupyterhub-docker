@@ -1,0 +1,77 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2021 National Institute for Space Research.
+#
+# BDC JupyterHub Docker is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+
+[jupyterhub]
+#
+# Base JupyterHub configurations
+#
+
+hub_ip = "jupyterhub"
+base_url = "/jupyter"
+
+[jupyterhub.oauth]
+#
+# Base OAuth configuration.
+#
+
+client_id = ""
+client_secret = ""
+oauth_callback_url = ""
+
+{% if cookiecutter.oauthenticator == "brazil-data-cube" -%}
+[jupyterhub.oauth.bdc]
+#
+# Brazil Data Cube OAuth client options.
+#
+oauth_application_name = "jupyterhub"
+
+admin_roles = ["admin"]
+allowed_roles = ["user"]
+allowed_groups = ["jupyterhub:user"]
+
+{% else %}
+[jupyterhub.oauth.google]
+#
+# Google OAuth client options
+#
+
+whitelist = ["user-1@mail.com"]
+admin_users = ["user-2@email.com", "user-3@mail.com"]
+{%- endif -%}
+
+[jupyterhub.spawner]
+#
+# Docker spawner options.
+#
+
+notebook_dir = "/home/jovyan/work"
+docker_network_name = "bdc-net"
+
+[jupyterhub.spawner.volumes]
+#
+# Docker spawner data volumes.
+#
+
+# "./data" = { "bind" = "/data", "mode" = "rw" }
+# "./examples" = { "bind" = "/home/jovyan/work/examples", "mode" = "ro" }
+
+[jupyterhub.spawner.images]
+#
+# Docker spawner available images.
+#
+
+"Jupyter (Minimal Notebook)" = "jupyter/minimal-notebook:lab-3.2.8"
+"Jupyter (R Notebook)" = "jupyter/r-notebook:r-4.1.2"
+
+[jupyterhub.spawner.resources]
+#
+# Docker spawner resource options.
+#
+
+remove = true
+cpu_limit = 1
+mem_limit = "2G"

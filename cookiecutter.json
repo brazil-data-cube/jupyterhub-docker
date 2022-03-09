@@ -1,0 +1,7 @@
+{
+    "project_name": "bdc-jupyterhub",
+    "project_directory": "{{ cookiecutter.project_name | lower | replace(' ', '-') }}",
+
+    "oauthenticator": ["brazil-data-cube", "google"],
+    "use_nginx": ["yes", "no"]
+}

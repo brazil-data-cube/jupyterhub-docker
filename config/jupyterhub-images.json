@@ -1,7 +1,0 @@
-{
-    "Satellite Image Time Series (SITS) version 0.9.8": "bdc/jupyterhub-sits:1.0.0",
-    "Python Geospatial": "bdc/jupyterhub-pygeo:1.0.0",
-    "R Geospatial": "bdc/jupyterhub-rgeo:1.0.0",
-    "Open Data Cube version 1.8": "bdc/jupyterhub-odc:1.0.0",
-    "Sentinel Toolboxes 8.0": "bdc/sentinel-toolboxes:1.0.0"
-}
