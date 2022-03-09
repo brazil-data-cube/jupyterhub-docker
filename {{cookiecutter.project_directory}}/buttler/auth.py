@@ -64,7 +64,7 @@ def configure_bdc_oauthenticator(jupyterhub_config_obj, dynaconf_obj):
 
     # OAuth 2.0 application name
     jupyterhub_config_obj.BrazilDataCubeOAuthenticator.oauth_application_name = (
-        dynaconf_obj.jupyterhub.oauth.oauth_application_name
+        dynaconf_obj.jupyterhub.oauth.bdc.oauth_application_name
     )
 
     # ACL
