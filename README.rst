@@ -89,29 +89,98 @@ Some of the information above can be filled with default values::
 
     project_name [bdc-jupyterhub]: sdc-jupyterhub
     project_directory [bdc-jupyterhub]: sdc-jupyterhub
-    oauthenticator:
-        Select oauthenticator:
-        1 - brazil-data-cube
-        2 - google
-        Choose from 1, 2 [1]:
+    Select oauthenticator:
+    1 - brazil-data-cube
+    2 - google
+    Choose from 1, 2 [1]:
     use_nginx [y]:
 
 
 **5.** The project will be created under the folder indicated by the ``project_directory`` entry. In the above example, the ``sdc-jupyterhub`` directory will contain the following files and subfolders::
 
-    docker-compose.full.yml
+    buttler
+    config
+    docker
     docker-compose.yml
+    .dockerignore
+    .env
     jupyterhub.py
     run.sh
+    users-home
 
 
 Configuring the JupyterHub Environment
 ======================================
 
 
-In the project folder, under the ``config/jupyterhub`` directory, you will locate a file named ``settings.toml``. You can edit it and provide your configuration. As an example, the example below shows how to fill the Google Authentication entries and set some host volumes that should be mounted in the spwaned containers...
+In the project folder, under the ``config/jupyterhub`` directory, you will locate a file named ``settings.toml``. You can edit it and provide your configuration. As an example, the example below shows how to fill the Google Authentication entries and set some host volumes that should be mounted in the spwaned containers::
 
-**TODO**
+    # -*- coding: utf-8 -*-
+    #
+    # Copyright (C) 2021 National Institute for Space Research.
+    #
+    # BDC JupyterHub Docker is free software; you can redistribute it and/or modify it
+    # under the terms of the MIT License; see LICENSE file for more details.
+
+    [jupyterhub]
+    #
+    # Base JupyterHub configurations
+    #
+
+    hub_ip = "jupyterhub"
+    base_url = "/jupyter"
+
+    [jupyterhub.oauth]
+    #
+    # Base OAuth configuration.
+    #
+
+    client_id = ""
+    client_secret = ""
+    oauth_callback_url = ""
+
+
+    [jupyterhub.oauth.google]
+    #
+    # Google OAuth client options
+    #
+
+    whitelist = ["user-1@mail.com"]
+    admin_users = ["user-2@email.com", "user-3@mail.com"][jupyterhub.spawner]
+    #
+    # Docker spawner options.
+    #
+
+    notebook_dir = "/home/jovyan/work"
+    docker_network_name = "bdc-net"
+
+    [jupyterhub.spawner.volumes]
+    #
+    # Docker spawner data volumes.
+    #
+
+    # "./data" = { "bind" = "/data", "mode" = "rw" }
+    # "./examples" = { "bind" = "/home/jovyan/work/examples", "mode" = "ro" }
+
+    [jupyterhub.spawner.images]
+    #
+    # Docker spawner available images.
+    #
+
+    "Jupyter (Minimal Notebook)" = "jupyter/minimal-notebook:lab-3.2.8"
+    "Jupyter (R Notebook)" = "jupyter/r-notebook:r-4.1.2"
+
+    [jupyterhub.spawner.resources]
+    #
+    # Docker spawner resource options.
+    #
+
+    remove = true
+    cpu_limit = 1
+    mem_limit = "2G"
+
+
+In the section ``jupyterhub.spawner.images`` you can inform all the Docker images that the JupyterHub should spawn.
 
 
 Building and Running JupyterHub
