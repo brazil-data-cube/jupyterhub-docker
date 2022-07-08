@@ -15,12 +15,12 @@ USER root
 
 
 #
-# Install some additional 
+# Install some additional
 #
 RUN source activate geospatial && \
     conda install --yes \
                   --channel conda-forge \
-                  opencv \ 
+                  opencv \
                   scikit-image scikit-plot
 
 
@@ -37,7 +37,7 @@ RUN cd /tmp/ && \
     rm install-snap.sh
 
 RUN mkdir -p /home/$NB_USER/.snap/ \
-	&& chown -R $NB_USER /home/$NB_USER/.snap/
+    && chown -R $NB_USER /home/$NB_USER/.snap/
 
 #
 # Change user to jovyan
