@@ -24,7 +24,7 @@ fi
 #
 wget -q \
         -O "/tmp/apache-maven-3.8.1-bin.tar.gz" \
-        "https://downloads.apache.org/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz"
+        "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.8.1/apache-maven-3.8.1-bin.tar.gz"
 
 cd /tmp && tar xzvf apache-maven-3.8.1-bin.tar.gz
 
